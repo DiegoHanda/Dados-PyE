@@ -24,23 +24,23 @@ def estrategia_juan():
         puntosJuan = dado1 + dado2 - 4
         print("Puntuación: ", puntosJuan, "\n")
         if dado1 < 4:
-            print("Lanza de nuevo el dado 1")
+            print("Lanza de nuevo el dado 1...")
             dado1 = tirar_dado()
         if dado2 < 4:
-            print("Lanza de nuevo el dado 2")
+            print("Lanza de nuevo el dado 2...")
             dado2 = tirar_dado()
         if dado1 == 4 or dado2 == 4:
             puntosJuan = dado1 + dado2 - 4
     else:
         print("Puntuación", puntosJuan, "\n")
-        print("Lanza de nuevo ambos dados")
+        print("Lanza de nuevo ambos dados...")
         dado1 = tirar_dado()
         dado2 = tirar_dado()
-        print("\nSEGUNDO LANZAMIENTO JUAN\n-----------------------\n|  DADO 1  |  DADO 2  |\n-----------------------\n|    ", dado1, "    |   ", dado2, "   |\n-----------------------")
         if dado1 == 4 or dado2 == 4:
             puntosJuan = dado1 + dado2 - 4
         else: 
             puntosJuan = 0
+    print("\nSEGUNDO LANZAMIENTO JUAN\n-----------------------\n|  DADO 1  |  DADO 2  |\n-----------------------\n|    ", dado1, "    |   ", dado2, "   |\n-----------------------")
     print("Puntuación Final de Juan: ", puntosJuan, "\n")
     return puntosJuan
         
@@ -57,26 +57,26 @@ def estrategia_maria(puntosJuan):
             return puntosMaria
         else:
             if dado1 == 4 & dado2 == 4:
-                print("Lanza de nuevo uno de los dados")
+                print("Lanza de nuevo uno de los dados...")
                 dado2 = tirar_dado()
             elif dado1 < 4:
-                print("Lanza de nuevo el dado 1")
+                print("Lanza de nuevo el dado 1...")
                 dado1 = tirar_dado()
             elif dado2 < 4:
-                print("Lanza de nuevo el dado 2")
+                print("Lanza de nuevo el dado 2...")
                 dado2 = tirar_dado()
             if dado1 == 4 or dado2 == 4:
                 puntosMaria = dado1 + dado2 - 4
     else:
         print("Puntuación: ", puntosMaria, "\n")
-        print("Lanza de nuevo ambos dados")
+        print("Lanza de nuevo ambos dados...")
         dado1 = tirar_dado()
         dado2 = tirar_dado()
-        print("\nSEGUNDO LANZAMIENTO MARÍA\n-----------------------\n|  DADO 1  |  DADO 2  |\n-----------------------\n|    ", dado1, "    |   ", dado2, "   |\n-----------------------")
         if dado1 == 4 or dado2 == 4:
             puntosMaria = dado1 + dado2 - 4
         else: 
             puntosMaria = 0
+    print("\nSEGUNDO LANZAMIENTO MARÍA\n-----------------------\n|  DADO 1  |  DADO 2  |\n-----------------------\n|    ", dado1, "    |   ", dado2, "   |\n-----------------------")
     print("Puntuación Final de María: ", puntosMaria, "\n")
     return puntosMaria
 
