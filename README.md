@@ -1,1 +1,1 @@
-# Tarea-2---Probabilidad-y-Estad-stica
+# Tarea 2 - Probabilidad y Estadística
