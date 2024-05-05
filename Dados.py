@@ -1,100 +1,81 @@
 import random
 
-def tirar_dado():
-    dado = random.randint(1, 6)
-    return dado
 
-def juego():
-    cantidadJuegosString = input("Ingrese cuantas veces quiere simular el juego, 1000, 10000 o 100000: ")
-    cantidadJuegos = int(cantidadJuegosString)
-    cantVictoriasJuan = 0
-    cantVictoriasMaria = 0
-    cantEmpates = 0
-    while(cantidadJuegos>0):
-        puntosJuan = estrategia_juan()
-        puntosMaria = estrategia_maria(puntosJuan)
-        print("      RESULTADO    \n----------------------\n| Nombre |  Puntos   |\n----------------------\n| Juan   |    ", puntosJuan, "    |\n| Maria  |    ", puntosMaria, "    |\n----------------------")
-        if puntosJuan > puntosMaria:
-            print("GANADOR: JUAN")
-            cantVictoriasJuan+=1
-        elif puntosMaria > puntosJuan:
-            print("GANADOR: MARiA")
-            cantVictoriasMaria+=1
+def roll_dice():
+    dice = random.randint(1, 6)
+    return dice
+
+
+def play_game():
+    sim_games_string = input(
+        "Ingrese cuantas veces quiere simular el juego: ")
+    sim_games = int(sim_games_string)
+    juan_wins = 0  # Cantidad de Victorias de Juan
+    maria_wins = 0  # Cantidad de Victorias de María
+    draws = 0  # Cantidad de Empates
+    while (sim_games > 0):
+        juan_score = juan_strategy()
+        maria_score = maria_strategy(juan_score)
+        if juan_score > maria_score:
+            juan_wins += 1
+        elif maria_score > juan_score:
+            maria_wins += 1
         else:
-            print("EMPATE")
-            cantEmpates+=1
-        cantidadJuegos = cantidadJuegos - 1
-        
-    print("Cantidad de victorias de Juan", cantVictoriasJuan)
-    print("Cantidad de victorias de Maria", cantVictoriasMaria)
-    print("Empates", cantEmpates)
-    
-             
+            draws += 1
+        sim_games = sim_games - 1
+    print("\n      RESULTADO    \n  Ganador |  Total"
+          "\n----------------------\n  Juan    |  ", juan_wins,
+          "\n----------------------\n  Maria   |  ", maria_wins,
+          "\n----------------------\n  Empate  |  ", draws, "\n")
 
-def estrategia_juan():
-    puntosJuan = 0
-    dado1 = tirar_dado()
-    dado2 = tirar_dado()
-    print("\nPRIMER LANZAMIENTO JUAN\n-----------------------\n|  DADO 1  |  DADO 2  |\n-----------------------\n|    ", dado1, "    |   ", dado2, "   |\n-----------------------")
-    if dado1 == 4 or dado2 == 4:
-        puntosJuan = dado1 + dado2 - 4
-        print("Puntuacion: ", puntosJuan, "\n")
-        if dado1 < 4:
-            print("Lanza de nuevo el dado 1...")
-            dado1 = tirar_dado()
-        if dado2 < 4:
-            print("Lanza de nuevo el dado 2...")
-            dado2 = tirar_dado()
-        if dado1 == 4 or dado2 == 4:
-            puntosJuan = dado1 + dado2 - 4
+
+def juan_strategy():
+    juan_score = 0
+    dice1 = roll_dice()
+    dice2 = roll_dice()
+    if dice1 == 4 or dice2 == 4:
+        juan_score = dice1 + dice2 - 4
+        if dice1 < 4:
+            dice1 = roll_dice()
+        if dice2 < 4:
+            dice2 = roll_dice()
+        if dice1 == 4 or dice2 == 4:
+            juan_score = dice1 + dice2 - 4
     else:
-        print("Puntuacion", puntosJuan, "\n")
-        print("Juan lanza de nuevo ambos dados...")
-        dado1 = tirar_dado()
-        dado2 = tirar_dado()
-        if dado1 == 4 or dado2 == 4:
-            puntosJuan = dado1 + dado2 - 4
-        else: 
-            puntosJuan = 0
-    print("\nSEGUNDO LANZAMIENTO JUAN\n-----------------------\n|  DADO 1  |  DADO 2  |\n-----------------------\n|    ", dado1, "    |   ", dado2, "   |\n-----------------------")
-    print("Puntuacion Final de Juan: ", puntosJuan, "\n")
-    return puntosJuan
-        
-def estrategia_maria(puntosJuan):
-    puntosMaria = 0
-    dado1 = tirar_dado()
-    dado2 = tirar_dado()
-    print("\nPRIMER LANZAMIENTO MARiA\n-----------------------\n|  DADO 1  |  DADO 2  |\n-----------------------\n|    ", dado1, "    |   ", dado2, "   |\n-----------------------")
-    if dado1 == 4 or dado2 == 4:
-        puntosMaria = dado1 + dado2 - 4
-        print("Puntuacion:", puntosMaria, "\n")
-        if puntosMaria > puntosJuan:
-            print ("Maria se retira\n")
-            return puntosMaria
+        dice1 = roll_dice()
+        dice2 = roll_dice()
+        if dice1 == 4 or dice2 == 4:
+            juan_score = dice1 + dice2 - 4
         else:
-            if dado1 == 4 & dado2 == 4:
-                print("Lanza de nuevo uno de los dados...")
-                dado2 = tirar_dado()
-            elif dado1 < 4:
-                print("Lanza de nuevo el dado 1...")
-                dado1 = tirar_dado()
-            elif dado2 < 4:
-                print("Lanza de nuevo el dado 2...")
-                dado2 = tirar_dado()
-            if dado1 == 4 or dado2 == 4:
-                puntosMaria = dado1 + dado2 - 4
+            juan_score = 0
+    return juan_score
+
+
+def maria_strategy(juan_score):
+    maria_score = 0
+    dice1 = roll_dice()
+    dice2 = roll_dice()
+    if dice1 == 4 or dice2 == 4:
+        maria_score = dice1 + dice2 - 4
+        if maria_score > juan_score:
+            return maria_score
+        else:
+            if dice1 == 4 & dice2 == 4:
+                dice2 = roll_dice()
+            elif dice1 < 4:
+                dice1 = roll_dice()
+            elif dice2 < 4:
+                dice2 = roll_dice()
+            if dice1 == 4 or dice2 == 4:
+                maria_score = dice1 + dice2 - 4
     else:
-        print("Puntuacion: ", puntosMaria, "\n")
-        print("Maria lanza de nuevo ambos dados...")
-        dado1 = tirar_dado()
-        dado2 = tirar_dado()
-        if dado1 == 4 or dado2 == 4:
-            puntosMaria = dado1 + dado2 - 4
-        else: 
-            puntosMaria = 0
-    print("\nSEGUNDO LANZAMIENTO MARiA\n-----------------------\n|  DADO 1  |  DADO 2  |\n-----------------------\n|    ", dado1, "    |   ", dado2, "   |\n-----------------------")
-    print("Puntuacion Final de Maria: ", puntosMaria, "\n")
-    return puntosMaria
+        dice1 = roll_dice()
+        dice2 = roll_dice()
+        if dice1 == 4 or dice2 == 4:
+            maria_score = dice1 + dice2 - 4
+        else:
+            maria_score = 0
+    return maria_score
 
 
-juego()
+play_game()
