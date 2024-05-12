@@ -21,7 +21,7 @@ def play_game():
             sim_games = int(sim_games_string)
             break
         else:
-            print("Por favor, ingrese un número entero positivo válido.")
+            print("Por favor, ingrese un número mayor a 0.")
 
     juan_wins = 0  # Cantidad de Victorias de Juan
     maria_wins = 0  # Cantidad de Victorias de María
